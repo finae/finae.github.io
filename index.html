@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Revolutionize Programming</title> 
-<style>
-body {  
-  background-color: black;
-}
+    <title>Revolutionize Programming</title>
+    <style>
+        body {
+            background-color: black;
+        }
 
-h1 {
-  color: white;
-  text-align: center;  
-}
+        h1 {
+            color: white;
+            text-align: center;
+        }
 
-video {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: 100%;
-  height: 100%;
-  transform: translateX(-50%) translateY(-50%); 
-}
-</style>
+        video {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 767px) {
+
+            video {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
-
-
-
-<video playsinline autoplay muted loop>
-  <source src="finae_demo_2_final.mp4" type="video/mp4">
-</video>
-
+    <video playsinline autoplay muted loop>
+        <source src="finae_demo_2_final.mp4" type="video/mp4">
+    </video>
 </body>
+
 </html>
