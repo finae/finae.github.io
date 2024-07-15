@@ -309,4 +309,7 @@
     border-radius: 50%;
     margin-bottom: 1rem;
   }
-  
+
+  .logo-font {
+    font-family: 'Montserrat', sans-serif;
+  }
