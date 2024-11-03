@@ -12,11 +12,12 @@
     }
 
     section {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       scroll-snap-align: start;
+      position: relative;
     }
 
     .scroll-container {
@@ -110,6 +111,24 @@
       box-shadow: 0 0 15px #00ff9544;
     }
 
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, #0a0a0a, transparent);
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .footer.visible {
+      opacity: 1;
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -189,13 +208,17 @@
         <p class="product-description">
           <span class="highlight">Transform Your Research →</span> From weeks to minutes. From uncertainty to clarity. From data to actionable insights.
         </p>
-        <a href="#" class="cta-button">Explore Gins AI</a>
+        <a href="https://gins.ai" class="cta-button">Explore Gins AI</a>
       </div>
     </section>
   </div>
 
+  <footer class="footer">
+    © 2024 Finae Labs Inc.
+  </footer>
+
   <script>
-    // Intersection Observer to trigger animation when section comes into view
+    // Intersection Observer for product section
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -208,6 +231,19 @@
 
     document.querySelector('.product-section').classList.remove('visible');
     observer.observe(document.querySelector('.product-section'));
+
+    // Show/hide footer based on scroll position
+    const footer = document.querySelector('.footer');
+    const scrollContainer = document.querySelector('.scroll-container');
+    
+    scrollContainer.addEventListener('scroll', () => {
+      const scrollPercentage = scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight);
+      if (scrollPercentage > 0.1) {
+        footer.classList.add('visible');
+      } else {
+        footer.classList.remove('visible');
+      }
+    });
   </script>
 </body>
 </html>
