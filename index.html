@@ -39,6 +39,16 @@
       position: relative;
     }
 
+    .mission-text {
+      font-size: 1.5vw;
+      letter-spacing: 0.1em;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border: 1px solid #00ff9522;
+      background: rgba(0, 255, 149, 0.05);
+    }
+
     .text::before {
       content: '';
       position: absolute;
@@ -69,7 +79,48 @@
       animation-play-state: paused;
     }
 
-    .product-section.visible {
+    .team-section {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeIn 1s ease-out forwards;
+      animation-play-state: paused;
+    }
+
+    .team-member {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+      padding: 2rem;
+      background: rgba(0, 255, 149, 0.05);
+      border: 1px solid #00ff9522;
+      text-align: left;
+    }
+
+    .team-member h3 {
+      color: #00ff95;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .team-member h4 {
+      color: #00ccff;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .team-member p {
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .product-section.visible,
+    .team-section.visible {
       animation-play-state: running;
     }
 
@@ -193,6 +244,9 @@
       <div class="container">
         <div class="text">Failure-Is-Not-An-Error</div>
         <div class="text glitch" aria-hidden="true">Failure-Is-Not-An-Error</div>
+        <div class="mission-text">
+          Empowering humanity through practical AI solutions. At FINAE LABS, we're committed to developing AI agents that solve real-world problems, enhance daily lives, and deliver tangible value at accessible price points.
+        </div>
       </div>
     </section>
 
@@ -211,6 +265,25 @@
         <a href="https://gins.ai" class="cta-button">Explore Gins AI</a>
       </div>
     </section>
+
+    <section>
+      <div class="team-section">
+        <div class="team-member">
+          <h3>Emma Yu</h3>
+          <h4>Cofounder, CEO</h4>
+          <p>
+            Seasoned growth leader in the SMB/B2C SaaS space. Formerly GM at MileIQ, Director of Marketing, Growth and Engagement at LinkedIn and Group Manager leading Data Science and Engagement at Microsoft.
+          </p>
+        </div>
+        <div class="team-member">
+          <h3>Ning Ren</h3>
+          <h4>Cofounder, CTO</h4>
+          <p>
+            Tech Lead and Senior Engineer at frontier tech companies (Google Brain, Pony AI). Extensive experience in deep learning, LLMs, and ML infrastructure management.
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 
   <footer class="footer">
@@ -218,7 +291,7 @@
   </footer>
 
   <script>
-    // Intersection Observer for product section
+    // Intersection Observer for sections with animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -230,7 +303,9 @@
     });
 
     document.querySelector('.product-section').classList.remove('visible');
+    document.querySelector('.team-section').classList.remove('visible');
     observer.observe(document.querySelector('.product-section'));
+    observer.observe(document.querySelector('.team-section'));
 
     // Show/hide footer based on scroll position
     const footer = document.querySelector('.footer');
