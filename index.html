@@ -29,24 +29,36 @@
     .container {
       position: relative;
       text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
     }
 
     .text {
-      font-size: 3vw;
+      font-size: 3.5vw;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       animation: glow 2s ease-in-out infinite alternate;
       position: relative;
+      margin-bottom: 3rem;
+      font-weight: 700;
     }
 
     .mission-text {
-      font-size: 1.5vw;
-      letter-spacing: 0.1em;
-      max-width: 800px;
-      margin: 2rem auto;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      max-width: 600px;
+      margin: 0 auto;
       padding: 2rem;
-      border: 1px solid #00ff9522;
-      background: rgba(0, 255, 149, 0.05);
+      border: 1px solid rgba(0, 255, 149, 0.15);
+      background: rgba(0, 255, 149, 0.03);
+      backdrop-filter: blur(5px);
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      font-weight: 300;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeUp 1s ease-out forwards;
     }
 
     .text::before {
@@ -56,7 +68,7 @@
       left: -20px;
       right: -20px;
       bottom: -20px;
-      border: 2px solid #00ff9522;
+      border: 2px solid rgba(0, 255, 149, 0.15);
       animation: borderPulse 4s ease-in-out infinite;
     }
 
@@ -70,7 +82,7 @@
     }
 
     .product-section {
-      padding: 2rem;
+      padding: 3rem;
       max-width: 800px;
       margin: 0 auto;
       opacity: 0;
@@ -86,6 +98,7 @@
       flex-wrap: wrap;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 2rem;
       opacity: 0;
       transform: translateY(50px);
       animation: fadeIn 1s ease-out forwards;
@@ -96,27 +109,40 @@
       flex: 1;
       min-width: 300px;
       max-width: 400px;
-      padding: 2rem;
-      background: rgba(0, 255, 149, 0.05);
-      border: 1px solid #00ff9522;
+      padding: 2.5rem;
+      background: rgba(0, 255, 149, 0.03);
+      border: 1px solid rgba(0, 255, 149, 0.15);
+      backdrop-filter: blur(5px);
       text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 255, 149, 0.05);
+      border-color: rgba(0, 255, 149, 0.25);
     }
 
     .team-member h3 {
       color: #00ff95;
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .team-member h4 {
       color: #00ccff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
     }
 
     .team-member p {
-      color: #ffffff;
-      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      font-weight: 300;
     }
 
     .product-section.visible,
@@ -130,36 +156,40 @@
       background: linear-gradient(45deg, #00ff95, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-weight: 600;
     }
 
     .product-description {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       line-height: 1.8;
       margin-bottom: 2rem;
-      color: #ffffff;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 300;
     }
 
     .highlight {
       color: #00ff95;
-      font-weight: bold;
+      font-weight: 500;
     }
 
     .cta-button {
       display: inline-block;
-      padding: 1rem 2rem;
-      border: 2px solid #00ff95;
-      background: transparent;
+      padding: 1rem 2.5rem;
+      border: 1px solid rgba(0, 255, 149, 0.5);
+      background: rgba(0, 255, 149, 0.05);
       color: #00ff95;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: all 0.3s ease;
       cursor: pointer;
+      letter-spacing: 0.05em;
+      backdrop-filter: blur(5px);
     }
 
     .cta-button:hover {
-      background: #00ff9522;
+      background: rgba(0, 255, 149, 0.1);
       transform: translateY(-2px);
-      box-shadow: 0 0 15px #00ff9544;
+      box-shadow: 0 5px 20px rgba(0, 255, 149, 0.2);
     }
 
     .footer {
@@ -167,13 +197,13 @@
       bottom: 0;
       width: 100%;
       padding: 1rem;
-      background: linear-gradient(to top, #0a0a0a, transparent);
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
       text-align: center;
       font-size: 0.9rem;
-      color: #666;
+      color: rgba(255, 255, 255, 0.4);
       opacity: 0;
       transition: opacity 0.3s ease;
-      pointer-events: none;
+      backdrop-filter: blur(5px);
     }
 
     .footer.visible {
@@ -191,23 +221,34 @@
       }
     }
 
-    @keyframes glow {
+    @keyframes fadeUp {
       from {
-        text-shadow: 0 0 5px #00ff95,
-                     0 0 10px #00ff95,
-                     0 0 15px #00ff95;
+        opacity: 0;
+        transform: translateY(20px);
       }
       to {
-        text-shadow: 0 0 10px #00ff95,
-                     0 0 20px #00ff95,
-                     0 0 30px #00ff95;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px rgba(0, 255, 149, 0.5),
+                     0 0 10px rgba(0, 255, 149, 0.3),
+                     0 0 15px rgba(0, 255, 149, 0.2);
+      }
+      to {
+        text-shadow: 0 0 10px rgba(0, 255, 149, 0.6),
+                     0 0 20px rgba(0, 255, 149, 0.4),
+                     0 0 30px rgba(0, 255, 149, 0.3);
       }
     }
 
     @keyframes borderPulse {
-      0% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.05); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 0.3; }
+      0% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.03); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 0.2; }
     }
 
     @keyframes glitch {
@@ -291,7 +332,6 @@
   </footer>
 
   <script>
-    // Intersection Observer for sections with animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -307,7 +347,6 @@
     observer.observe(document.querySelector('.product-section'));
     observer.observe(document.querySelector('.team-section'));
 
-    // Show/hide footer based on scroll position
     const footer = document.querySelector('.footer');
     const scrollContainer = document.querySelector('.scroll-container');
     
