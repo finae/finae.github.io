@@ -72,15 +72,6 @@
       animation: borderPulse 4s ease-in-out infinite;
     }
 
-    .glitch {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      clip: rect(0, 0, 0, 0);
-      animation: glitch 3s infinite linear alternate-reverse;
-    }
-
     .product-section {
       padding: 3rem;
       max-width: 800px;
@@ -250,33 +241,6 @@
       50% { transform: scale(1.03); opacity: 0.5; }
       100% { transform: scale(1); opacity: 0.2; }
     }
-
-    @keyframes glitch {
-      0% {
-        clip: rect(44px, 9999px, 56px, 0);
-        transform: skew(0.5deg);
-      }
-      5% {
-        clip: rect(62px, 9999px, 82px, 0);
-        transform: skew(0.2deg);
-      }
-      10% {
-        clip: rect(29px, 9999px, 49px, 0);
-        transform: skew(0.8deg);
-      }
-      15% {
-        clip: rect(73px, 9999px, 93px, 0);
-        transform: skew(0.4deg);
-      }
-      20% {
-        clip: rect(35px, 9999px, 55px, 0);
-        transform: skew(-0.2deg);
-      }
-      25% {
-        clip: rect(25px, 9999px, 45px, 0);
-        transform: skew(0.4deg);
-      }
-    }
   </style>
 </head>
 <body>
@@ -284,7 +248,6 @@
     <section>
       <div class="container">
         <div class="text">Failure-Is-Not-An-Error</div>
-        <div class="text glitch" aria-hidden="true">Failure-Is-Not-An-Error</div>
         <div class="mission-text">
           Empowering humanity through practical AI solutions. At FINAE LABS, we're committed to developing AI agents that solve real-world problems, enhance daily lives, and deliver tangible value at accessible price points.
         </div>
