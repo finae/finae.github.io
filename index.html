@@ -1,326 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #0a0a0a;
-      font-family: 'Courier New', monospace;
-      color: #00ff95;
-      overflow-x: hidden;
-    }
-
-    section {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      scroll-snap-align: start;
-      position: relative;
-    }
-
-    .scroll-container {
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      height: 100vh;
-    }
-
-    .container {
-      position: relative;
-      text-align: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .text {
-      font-size: 3.5vw;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      animation: glow 2s ease-in-out infinite alternate;
-      position: relative;
-      margin-bottom: 3rem;
-      font-weight: 700;
-    }
-
-    .mission-text {
-      font-size: 1rem;
-      letter-spacing: 0.05em;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 2rem;
-      border: 1px solid rgba(0, 255, 149, 0.15);
-      background: rgba(0, 255, 149, 0.03);
-      backdrop-filter: blur(5px);
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.8;
-      font-weight: 300;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeUp 1s ease-out forwards;
-    }
-
-    .text::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
-      border: 2px solid rgba(0, 255, 149, 0.15);
-      animation: borderPulse 4s ease-in-out infinite;
-    }
-
-    .product-section {
-      padding: 3rem;
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeIn 1s ease-out forwards;
-      animation-play-state: paused;
-    }
-
-    .team-section {
-      display: flex;
-      justify-content: center;
-      gap: 4rem;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeIn 1s ease-out forwards;
-      animation-play-state: paused;
-    }
-
-    .team-member {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
-      padding: 2.5rem;
-      background: rgba(0, 255, 149, 0.03);
-      border: 1px solid rgba(0, 255, 149, 0.15);
-      backdrop-filter: blur(5px);
-      text-align: left;
-      transition: all 0.3s ease;
-    }
-
-    .team-member:hover {
-      transform: translateY(-5px);
-      background: rgba(0, 255, 149, 0.05);
-      border-color: rgba(0, 255, 149, 0.25);
-    }
-
-    .team-member h3 {
-      color: #00ff95;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .team-member h4 {
-      color: #00ccff;
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-    }
-
-    .team-member p {
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.8;
-      font-size: 0.95rem;
-      font-weight: 300;
-    }
-
-    .product-section.visible,
-    .team-section.visible {
-      animation-play-state: running;
-    }
-
-    .product-title {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      background: linear-gradient(45deg, #00ff95, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 600;
-    }
-
-    .product-description {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      color: rgba(255, 255, 255, 0.8);
-      font-weight: 300;
-    }
-
-    .highlight {
-      color: #00ff95;
-      font-weight: 500;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border: 1px solid rgba(0, 255, 149, 0.5);
-      background: rgba(0, 255, 149, 0.05);
-      color: #00ff95;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      backdrop-filter: blur(5px);
-    }
-
-    .cta-button:hover {
-      background: rgba(0, 255, 149, 0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(0, 255, 149, 0.2);
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
-      text-align: center;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.4);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .footer.visible {
-      opacity: 1;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px rgba(0, 255, 149, 0.5),
-                     0 0 10px rgba(0, 255, 149, 0.3),
-                     0 0 15px rgba(0, 255, 149, 0.2);
-      }
-      to {
-        text-shadow: 0 0 10px rgba(0, 255, 149, 0.6),
-                     0 0 20px rgba(0, 255, 149, 0.4),
-                     0 0 30px rgba(0, 255, 149, 0.3);
-      }
-    }
-
-    @keyframes borderPulse {
-      0% { transform: scale(1); opacity: 0.2; }
-      50% { transform: scale(1.03); opacity: 0.5; }
-      100% { transform: scale(1); opacity: 0.2; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINAE Labs Inc. - Making AI Work for Everyone</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+        p {
+            margin-bottom: 1.5rem;
+        }
+        .beta-signup {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .founders {
+            margin-top: 2rem;
+            font-style: italic;
+        }
+        .contact {
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="scroll-container">
-    <section>
-      <div class="container">
-        <div class="text">Failure-Is-Not-An-Error</div>
-        <div class="mission-text">
-          Empowering humanity through practical AI solutions. At FINAE LABS, we're committed to developing AI agents that solve real-world problems, enhance daily lives, and deliver tangible value at accessible price points.
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="product-section">
-        <h2 class="product-title">Revolutionizing Market Intelligence</h2>
-        <p class="product-description">
-          Welcome to the future of market research. Our <span class="highlight">AI-powered synthetic persona platform</span> brings unprecedented speed and depth to customer insights.
-        </p>
-        <p class="product-description">
-          Break free from traditional research constraints. Generate real-time insights that drive growth and inform strategic decisions with confidence. Our platform empowers marketing leaders to stay ahead in an ever-evolving market landscape.
-        </p>
-        <p class="product-description">
-          <span class="highlight">Transform Your Research →</span> From weeks to minutes. From uncertainty to clarity. From data to actionable insights.
-        </p>
-        <a href="https://gins.ai" class="cta-button">Explore Gins AI</a>
-      </div>
-    </section>
-
-    <section>
-      <div class="team-section">
-        <div class="team-member">
-          <h3>Emma Yu</h3>
-          <h4>Cofounder, CEO</h4>
-          <p>
-            Seasoned growth leader in the SMB/B2C SaaS space. Formerly GM at MileIQ, Director of Marketing, Growth and Engagement at LinkedIn and Group Manager leading Data Science and Engagement at Microsoft.
-          </p>
-        </div>
-        <div class="team-member">
-          <h3>Ning Ren</h3>
-          <h4>Cofounder, CTO</h4>
-          <p>
-            Tech Lead and Senior Engineer at frontier tech companies (Google Brain, Pony AI). Extensive experience in deep learning, LLMs, and ML infrastructure management.
-          </p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer class="footer">
-    © 2024 Finae Labs Inc.
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-
-    document.querySelector('.product-section').classList.remove('visible');
-    document.querySelector('.team-section').classList.remove('visible');
-    observer.observe(document.querySelector('.product-section'));
-    observer.observe(document.querySelector('.team-section'));
-
-    const footer = document.querySelector('.footer');
-    const scrollContainer = document.querySelector('.scroll-container');
+    <h1>FINAE Labs Inc.</h1>
     
-    scrollContainer.addEventListener('scroll', () => {
-      const scrollPercentage = scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight);
-      if (scrollPercentage > 0.1) {
-        footer.classList.add('visible');
-      } else {
-        footer.classList.remove('visible');
-      }
-    });
-  </script>
+    <h2>Making AI work for everyone.</h2>
+
+    <p>We build affordable AI agents that solve real business problems. Our first product, Gins.AI, brings autonomous marketing to small businesses - handling everything from content creation to campaign optimization.</p>
+
+    <p>Our name comes from SFINAE in C++ ("Substitution Failure Is Not An Error"). Just like SFINAE keeps trying different approaches until finding the right match, our agents persist through challenges to find optimal solutions. This isn't just our technology - it's our culture. We see failures not as setbacks, but as valuable datapoints guiding us toward better solutions.</p>
+
+    <p>Based in Mountain View, CA, we're a team of engineers and researchers making AI technology accessible to all.</p>
+
+    <div class="beta-signup">
+        <p><strong>Currently in beta: Gins.AI</strong><br>
+        Sign up for early access to our autonomous marketing platform.</p>
+    </div>
+
+    <div class="founders">
+        <p>Ning & Emma<br>
+        Co-founders, FINAE Labs Inc.</p>
+    </div>
+
+    <div class="contact">
+        <p>Contact: <a href="mailto:founders@finae.ai">founders@finae.ai</a></p>
+    </div>
 </body>
 </html>
